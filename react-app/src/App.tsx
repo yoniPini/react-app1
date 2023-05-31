@@ -1,6 +1,20 @@
-// import ListGroup from "./components/ListGroup";
+import { useState } from "react";
+import Button from "./components/Button";
+import Alert from "./components/Alert";
+
 function App() {
-  return <div>{/* <ListGroup /> */}</div>;
+  const [clicked, setClicked] = useState(false);
+
+  let color = "secondary";
+  return (
+    <div>
+      {clicked && <Alert onClose={() => setClicked(false)}>My Alert</Alert>}
+
+      <Button onClick={() => setClicked(true)} color={color}>
+        hello
+      </Button>
+    </div>
+  );
 }
 
 export default App;
