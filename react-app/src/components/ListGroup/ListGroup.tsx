@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ListGroup.css";
 
 interface Props {
   items: string[];

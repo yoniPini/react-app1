@@ -1,18 +1,51 @@
 import { useState } from "react";
-import Button from "./components/Button";
-import Alert from "./components/Alert";
+import ExpanseList from "./components/expnase-tracker/components/expanseList";
+import ExpenseFilter from "./components/expnase-tracker/components/ExpenseFilter";
+import ExpenseForm from "./components/expnase-tracker/components/ExpenseForm";
+import categories from "./components/expnase-tracker/categories";
 
 function App() {
-  const [clicked, setClicked] = useState(false);
-
-  let color = "secondary";
+  const [expenses, setExpenses] = useState([
+    {
+      id: 1,
+      description: "11",
+      amount: 10,
+      category: "Utilities",
+    },
+    {
+      id: 2,
+      description: "22",
+      amount: 10,
+      category: "Utilities",
+    },
+    {
+      id: 3,
+      description: "33",
+      amount: 10,
+      category: "Groceries",
+    },
+  ]);
+  const [filter, setFilter] = useState("");
   return (
     <div>
-      {clicked && <Alert onClose={() => setClicked(false)}>My Alert</Alert>}
-
-      <Button onClick={() => setClicked(true)} color={color}>
-        hello
-      </Button>
+      <div className="mb-5">
+        <ExpenseForm
+          onSubmit={(expense) =>
+            setExpenses([...expenses, { ...expense, id: expenses.length + 1 }])
+          }
+        />
+      </div>
+      <ExpenseFilter
+        onSelect={(c) => {
+          setFilter(c);
+        }}
+      />
+      <ExpanseList
+        expenses={expenses.filter((exp) =>
+          filter ? exp.category === filter : true
+        )}
+        onDelete={(id) => setExpenses(expenses.filter((exp) => exp.id !== id))}
+      />
     </div>
   );
 }
