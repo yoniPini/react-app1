@@ -10,7 +10,7 @@ interface Props {
   onDelete: (id: number) => void;
 }
 
-const ExpanseList = ({ expenses, onDelete }: Props) => {
+const ExpenseList = ({ expenses, onDelete }: Props) => {
   if (!expenses.length) return null;
 
   return (
@@ -59,4 +59,4 @@ const ExpanseList = ({ expenses, onDelete }: Props) => {
   );
 };
 
-export default ExpanseList;
+export default ExpenseList;
