@@ -3,15 +3,15 @@ import ExpenseForm from "./ExpenseForm";
 import ExpenseFilter from "./ExpenseFilter";
 import ExpanseList from "./ExpenseList";
 
+interface Expense2 {
+  id: number;
+  description: string;
+  amount: number;
+  category: "Utilities" | "Groceries" | "Entertainment";
+}
+
 const ExpenseTracker = () => {
-  const [expenses, setExpenses] = useState([
-    {
-      id: 1,
-      description: "milk",
-      amount: 2,
-      category: "Groceries",
-    },
-  ]);
+  const [expenses, setExpenses] = useState<Expense2[]>([]);
   const [filter, setFilter] = useState("");
   return (
     <div>

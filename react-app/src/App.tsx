@@ -1,10 +1,27 @@
-import ExpenseTracker from "./components/expnase-tracker/components/ExpenseTracker";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+
+interface User {
+  id: number;
+  name: string;
+}
 
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
-    <div className="mb-5">
-      <ExpenseTracker></ExpenseTracker>
-    </div>
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
   );
 }
 
